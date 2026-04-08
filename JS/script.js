@@ -17,31 +17,57 @@ fetch(base)
         const tbody = document.getElementById('table-body');
         tbody.innerHTML = ''; 
 
+        let countTersedia = 0;
+        let countBelum = 0;
+
         rows.forEach((row, index) => {
             if (row.c[0] && row.c[0].v) { // Hanya render jika kolom 'Item' tidak kosong
                 const tr = document.createElement('tr');
                 const cells = row.c.map(cell => cell ? (cell.f || cell.v) : '-');
                 
+                // Menentukan warna note berdasarkan teks
+                const noteVal = cells[8] ? cells[8].toString().trim().toLowerCase() : '';
+                let noteColor = 'inherit';
+                if (noteVal === 'tersedia') {
+                    noteColor = '#2e7d32'; // Hijau
+                    countTersedia++;
+                } else if (noteVal === 'belum') {
+                    noteColor = '#d32f2f'; // Merah
+                    countBelum++;
+                } else if (noteVal !== '' && noteVal !== '-') {
+                    noteColor = '#f57f17'; // Kuning keorenan untuk status lain seperti "Baru 1"
+                }
+
+                const linkHTML = row.c[7] && row.c[7].v ? `<a href="${row.c[7].v}" target="_blank">Link</a>` : '-';
+                const noteHTML = cells[8] !== '-' ? `<span style="font-weight:bold; color:${noteColor};">${cells[8]}</span>` : '-';
+
                 tr.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${cells[0]}</td>
-                    <td>${cells[1]}</td>
-                    <td>${cells[2]}</td>
-                    <td>${cells[3]}</td>
-                    <td>${cells[4]}</td>
-                    <td>${cells[5]}</td>
-                    <td>${cells[6]}</td>
-                    <td>${cells[7]}</td>
-                    <td>${row.c[8] && row.c[8].v ? `<a href="${row.c[8].v}" target="_blank">Link</a>` : '-'}</td>
-                    <td>${cells[9] || ''}</td>
+                    <td>${cells[0]}</td> <!-- Item -->
+                    <td>${cells[1]}</td> <!-- Type -->
+                    <td>${cells[2]}</td> <!-- Color -->
+                    <td>${cells[3]}</td> <!-- Quantity -->
+                    <td>${cells[4]}</td> <!-- Cost/Pcs -->
+                    <td>${cells[5]}</td> <!-- Total Cost -->
+                    <td>${cells[6]}</td> <!-- Status -->
+                    <td>${linkHTML}</td> <!-- Link -->
+                    <td>${noteHTML}</td> <!-- Note -->
                 `;
                 tbody.appendChild(tr);
             }
         });
+
+        // Update teks jumlah tersedia dan belum
+        const elTersedia = document.getElementById('count-tersedia');
+        const elBelum = document.getElementById('count-belum');
+        if(elTersedia) elTersedia.innerText = countTersedia;
+        if(elBelum) elBelum.innerText = countBelum;
     })
+
+    
     .catch(err => {
         console.error("Error fetching data:", err);
-        document.getElementById('table-body').innerHTML = '<tr><td colspan="11">Gagal memuat data.</td></tr>';
+        document.getElementById('table-body').innerHTML = '<tr><td colspan="10">Gagal memuat data.</td></tr>';
     });
 
 // --- Logika Tombol Back to Top (Kode kamu sebelumnya) ---

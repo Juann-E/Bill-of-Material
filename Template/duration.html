@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/duration.css">
+    <title>Project Duration - Lucia</title>
+</head>
+<body>
+    <div class="tabs">
+        <input type="radio" name="tabs" id="tabone">
+        <label for="tabone" onclick="window.location.href='index.html'">Bill of Material</label>
+
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo" onclick="window.location.href='index.html'">Media</label>
+
+        <input type="radio" name="tabs" id="tabthree" checked="checked">
+        <label for="tabthree">Duration</label>
+
+        <div class="tab-content">
+            <h1>Project Duration & Material</h1>
+            
+            <div class="summary-container">
+                <div class="summary-card">
+                    <h3>Total Waktu (Jam)</h3>
+                    <div class="summary-grid">
+                        <span>Total: <strong id="sum-time-total">216.79</strong></span>
+                        <span>Wakizashi: <strong id="sum-time-waki">47</strong></span>
+                        <span>Odachi: <strong id="sum-time-odachi">179.47</strong></span>
+                        <span>Connector: <strong id="sum-time-conn">2.7</strong></span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Material (KG)</h3>
+                    <div class="summary-grid">
+                        <span>Total: <strong id="sum-mat-total">1.15</strong></span>
+                        <span>Wakizashi: <strong id="sum-mat-waki">0.3</strong></span>
+                        <span>Odachi: <strong id="sum-mat-odachi">0.8</strong></span>
+                        <span>Connector: <strong id="sum-mat-conn">0.3</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-data">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Part Name</th>
+                            <th>Print Time</th>
+                            <th>Weight (g)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="duration-table-body">
+                        <tr>
+                            <td colspan="4" style="text-align: center;">Memuat data durasi...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-back-to-top" title="Kembali ke Atas">↑</button>
+
+    <script src="../JS/duration.js"></script>
+</body>
+</html>
