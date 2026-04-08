@@ -30,7 +30,7 @@ if (tbodyIndex) {
             if (row.c[0] && row.c[0].v) {
                 const tr = document.createElement('tr');
                 const cells = row.c.map(cell => cell ? (cell.f || cell.v) : '-');
-                
+
                 // Note ada di indeks 8 (Kolom I) berdasarkan data lokal kamu
                 const noteVal = cells[8] ? cells[8].toString().trim().toLowerCase() : '';
                 let noteColor = 'inherit';
@@ -81,7 +81,7 @@ const tbodyDuration = document.getElementById('duration-table-body');
 if (tbodyDuration) {
     fetchSheetData('1577982641', (rows) => {
         tbodyDuration.innerHTML = '';
-        
+
         let summary = {
             wTotal: '-', wWaki: '-', wOdachi: '-', wConn: '-',
             mTotal: '-', mWaki: '-', mOdachi: '-', mConn: '-'
@@ -95,14 +95,16 @@ if (tbodyDuration) {
                 const jam = row.c[5] ? row.c[5].v : 0;
                 const menit = row.c[6] ? row.c[6].v : 0;
                 let printTime = (jam !== 0 || menit !== 0) ? `${jam}j ${menit}m` : (row.c[7] ? `${row.c[7].f || row.c[7].v} Jam` : '-');
-                
+
                 const status = row.c[4] ? row.c[4].v.toString().toLowerCase() : '';
                 let statusHTML = row.c[4] ? row.c[4].v : '-';
-                
+
                 if (status === 'done') {
-                    statusHTML = `<span class="status-badge done">${row.c[4].v}</span>`;
+                    statusHTML = `<span class="status-badge done" style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #2e7d32; background-color: #e8f5e9; color: #2e7d32; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${row.c[4].v}</span>`;
                 } else if (status === 'queue') {
-                    statusHTML = `<span class="status-badge queue">${row.c[4].v}</span>`;
+                    statusHTML = `<span class="status-badge queue" style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #d32f2f; background-color: #ffebee; color: #d32f2f; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${row.c[4].v}</span>`;
+                } else if (status === 'running') {
+                    statusHTML = `<span class="status-badge running" style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #f57f17; background-color: #fffde7; color: #f57f17; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${row.c[4].v}</span>`;
                 }
 
                 tr.innerHTML = `
@@ -128,7 +130,7 @@ if (tbodyDuration) {
         });
 
         // Update DOM Summary
-        const updateSum = (id, val) => { if(document.getElementById(id)) document.getElementById(id).innerText = val; };
+        const updateSum = (id, val) => { if (document.getElementById(id)) document.getElementById(id).innerText = val; };
         updateSum('sum-time-total', summary.wTotal); updateSum('sum-time-waki', summary.wWaki);
         updateSum('sum-time-odachi', summary.wOdachi); updateSum('sum-time-conn', summary.wConn);
         updateSum('sum-mat-total', summary.mTotal); updateSum('sum-mat-waki', summary.mWaki);
@@ -146,13 +148,13 @@ if (backToTopBtn) backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavio
 // Modal Gambar
 const modal = document.getElementById("image-modal");
 document.querySelectorAll(".clickable-image").forEach(img => {
-    img.onclick = function() {
+    img.onclick = function () {
         modal.style.display = "block";
         document.getElementById("img-fullscreen").src = this.src;
         document.getElementById("modal-caption").innerHTML = this.alt;
         document.body.style.overflow = "hidden";
     }
 });
-const closeModal = () => { if(modal) { modal.style.display = "none"; document.body.style.overflow = "auto"; }};
+const closeModal = () => { if (modal) { modal.style.display = "none"; document.body.style.overflow = "auto"; } };
 if (document.querySelector(".close-modal")) document.querySelector(".close-modal").onclick = closeModal;
 window.onclick = (e) => { if (e.target === modal) closeModal(); };
