@@ -45,6 +45,8 @@ fetch(durationBase)
                             statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #d32f2f; background-color: #ffebee; color: #d32f2f; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
                         } else if (statusVal === 'done') {
                             statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #2e7d32; background-color: #e8f5e9; color: #2e7d32; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
+                        } else if (statusVal === 'running') {
+                            statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #f57f17; background-color: #fffde7; color: #f57f17; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
                         }
 
                         tr.innerHTML = `

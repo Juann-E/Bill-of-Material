@@ -25,6 +25,7 @@ if (tbodyIndex) {
         tbodyIndex.innerHTML = '';
         let countTersedia = 0;
         let countBelum = 0;
+        let totalCostBelum = 0;
 
         rows.forEach((row, index) => {
             if (row.c[0] && row.c[0].v) {
@@ -44,6 +45,9 @@ if (tbodyIndex) {
                     noteColor = '#d32f2f';
                     countBelum++;
                     rowClass = 'border-red';
+                    if (row.c[5] && typeof row.c[5].v === 'number') {
+                        totalCostBelum += row.c[5].v;
+                    }
                 } else if (noteVal !== '' && noteVal !== '-') {
                     noteColor = '#f57f17';
                     rowClass = 'border-yellow';
@@ -73,6 +77,9 @@ if (tbodyIndex) {
         // Update Stats di Header
         if (document.getElementById('count-tersedia')) document.getElementById('count-tersedia').innerText = countTersedia;
         if (document.getElementById('count-belum')) document.getElementById('count-belum').innerText = countBelum;
+        
+        const formatRupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        if (document.getElementById('total-cost-belum-val')) document.getElementById('total-cost-belum-val').innerText = formatRupiah(totalCostBelum);
     });
 }
 
