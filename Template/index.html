@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/Proposal.css">
-    <title>Lucia: Crimson Weave - BOM</title>
+    <title>Lucia: Crimson Weave - Project Tracker</title>
 </head>
 <body>
     <div class="tabs">
         <input type="radio" name="tabs" id="tabone" checked="checked">
         <label for="tabone">Bill of Material</label>
-        
         <div class="tab-content">
             <h1>Lucia: Crimson Weave | NightBlaze</h1>
-            <a href="https://grayravens.com/wiki/Lucia:_Crimson_Weave" target="_blank">Crimson Weave Wiki</a>
+            <div class="header-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #03294e; padding-bottom: 10px;">
+                <a href="https://grayravens.com/wiki/Lucia:_Crimson_Weave" target="_blank">Crimson Weave Wiki</a>
+                <span id="total-cost-display" style="color: #03294e; background: #e1f5fe; padding: 8px 15px; border-radius: 4px;">
+                    Total Cost: <strong id="total-cost-val" style="color: #d32f2f;">Memuat...</strong>
+                </span>
+            </div>
 
             <div class="tab-data">
-                <table border="1">
+                <table>
                     <thead>
                         <tr>
                             <th>No</th>
@@ -40,6 +44,31 @@
                 </table>
             </div>
         </div>
+
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">Media</label>
+        <div class="tab-content">
+            <h1>Project Media</h1>
+            <div class="media-grid">
+                <img src="../Media/1.png" alt="Media 1" class="clickable-image">
+                <img src="../Media/2.png" alt="Media 2" class="clickable-image">
+                <img src="../Media/3.png" alt="Media 3" class="clickable-image">
+                <img src="../Media/4.png" alt="Media 4" class="clickable-image">
+                <img src="../Media/5.png" alt="Media 5" class="clickable-image">
+                <img src="../Media/6.png" alt="Media 6" class="clickable-image">
+                <img src="../Media/7.1.png" alt="Media 7" class="clickable-image">
+                <img src="../Media/7.png" alt="Media 8" class="clickable-image">
+                <img src="../Media/8.png" alt="Media 9" class="clickable-image">
+            </div>
+        </div>
+    </div>
+
+    <button id="btn-back-to-top" title="Kembali ke Atas">↑</button>
+
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="img-fullscreen">
+        <div id="modal-caption"></div>
     </div>
 
     <script src="../JS/script.js"></script>
