@@ -9,6 +9,11 @@ fetch(durationBase)
         const json = JSON.parse(temp);
         const rows = json.table.rows;
 
+        let countDone = 0;
+        let countQueue = 0;
+        let countRunning = 0;
+        let listRunning = [];
+
         const tbody = document.getElementById('duration-table-body');
         if (tbody) {
             tbody.innerHTML = '';
@@ -42,10 +47,14 @@ fetch(durationBase)
                         let statusHTML = status;
                         const statusVal = status.toString().trim().toLowerCase();
                         if (statusVal === 'queue') {
+                            countQueue++;
                             statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #d32f2f; background-color: #ffebee; color: #d32f2f; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
                         } else if (statusVal === 'done') {
+                            countDone++;
                             statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #2e7d32; background-color: #e8f5e9; color: #2e7d32; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
                         } else if (statusVal === 'running') {
+                            countRunning++;
+                            listRunning.push(partName);
                             statusHTML = `<span style="padding: 4px 8px; border-radius: 4px; border: 1.5px solid #f57f17; background-color: #fffde7; color: #f57f17; font-weight: bold; display: inline-block; text-align: center; min-width: 60px;">${status}</span>`;
                         }
 
@@ -99,6 +108,20 @@ fetch(durationBase)
         if (document.getElementById('sum-mat-waki')) document.getElementById('sum-mat-waki').innerText = mWaki;
         if (document.getElementById('sum-mat-odachi')) document.getElementById('sum-mat-odachi').innerText = mOdachi;
         if (document.getElementById('sum-mat-conn')) document.getElementById('sum-mat-conn').innerText = mConn;
+
+        // Set Status
+        if (document.getElementById('sum-status-done')) document.getElementById('sum-status-done').innerText = countDone;
+        if (document.getElementById('sum-status-queue')) document.getElementById('sum-status-queue').innerText = countQueue;
+        if (document.getElementById('sum-status-running')) document.getElementById('sum-status-running').innerText = countRunning;
+        
+        const listRunEl = document.getElementById('sum-status-running-list');
+        if (listRunEl) {
+            if (listRunning.length > 0) {
+                listRunEl.innerHTML = "List: " + listRunning.join(', ');
+            } else {
+                listRunEl.innerHTML = "-";
+            }
+        }
 
     })
     .catch(err => {
